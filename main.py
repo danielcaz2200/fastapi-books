@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from contextlib import closing
 from typing import Optional
+from fastapi.staticfiles import StaticFiles
 
 import sqlite3
 
@@ -27,6 +28,7 @@ class Settings(BaseSettings):
 # Init settings and app
 settings = Settings()
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory='templates')
 
 
@@ -36,9 +38,16 @@ def get_db():
         yield db
 
 
-@app.get('/')
-def index():
-    return {'message': 'FastAPI Book API'}
+@app.get('/index/', response_class=HTMLResponse)
+def index(request: Request):
+    
+    context = {
+        'request': request
+    }
+
+    return templates.TemplateResponse(
+       "index.html", context
+    )
 
 
 @app.get('/books/')
