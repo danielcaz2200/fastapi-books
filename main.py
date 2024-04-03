@@ -50,13 +50,23 @@ def index(request: Request):
     )
 
 
-@app.get('/books/')
-def all_books(db: sqlite3.Connection = Depends(get_db)):
+@app.get('/books/', response_class=HTMLResponse)
+def all_books(request: Request, db: sqlite3.Connection = Depends(get_db)):
     cur = db.cursor()
     query = """SELECT * FROM books;"""
     res = cur.execute(query)
+    books = res.fetchall()
 
-    return {'books': res.fetchall()}
+    # return {'books': res.fetchall()}
+
+    context = {
+        "books": books, 
+        'request': request
+    }
+
+    return templates.TemplateResponse(
+        "books.html", context
+    )
 
 
 @app.post('/books/', status_code=201)

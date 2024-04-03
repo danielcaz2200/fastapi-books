@@ -578,8 +578,28 @@ video {
   display: flex;
 }
 
+.table {
+  display: table;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
+.min-w-\[50\%\] {
+  min-width: 50%;
+}
+
 .cursor-not-allowed {
   cursor: not-allowed;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .justify-between {
@@ -666,6 +686,11 @@ video {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .text-blue-500 {
