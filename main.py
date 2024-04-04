@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, Request, HTTPException
+from fastapi import FastAPI, Depends, Request, HTTPException, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
@@ -60,14 +60,23 @@ def all_books(request: Request, db: sqlite3.Connection = Depends(get_db)):
     # return {'books': res.fetchall()}
 
     context = {
-        "books": books, 
+        'books': books, 
         'request': request
     }
 
     return templates.TemplateResponse(
-        "books.html", context
+        'books.html', context
     )
 
+@app.get('/search/', response_class=HTMLResponse)
+def search(request: Request):
+    context = {
+        'request': request
+    }
+
+    return templates.TemplateResponse(
+        'search.html', context
+    )
 
 @app.post('/books/', status_code=201)
 def create_book(
@@ -92,6 +101,7 @@ def create_book(
         )
 
     book_dict['id'] = cur.lastrowid
+    
     return book_dict
 
 
@@ -119,11 +129,12 @@ def delete_book(
     return {'message': 'Item deleted'}
 
 
-@app.get('/search', status_code=201)
-def search(
-    published: Optional[str] = None,
-    author: Optional[str] = None,
-    title: Optional[str] = None,
+@app.post('/search/', response_class=HTMLResponse, status_code=201)
+def search_book(
+    request: Request,
+    published: Optional[str] = Form(None),
+    author: Optional[str] = Form(None),
+    title: Optional[str] = Form(None),
     db: sqlite3.Connection = Depends(get_db)
 ):
     cur = db.cursor()
@@ -150,7 +161,16 @@ def search(
     query += ";"
     res = cur.execute(query, values)
 
-    return {'books': res.fetchall()}
+    books = res.fetchall()
+
+    context = {
+        'request': request,
+        'books': books
+    }
+
+    return templates.TemplateResponse(
+        'partials/search_results.html', context
+    )
 
 
 @app.put('/books/{id}', status_code=200)

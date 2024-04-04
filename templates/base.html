@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="pragma" content="no-cache" />
     <title>Book app</title>
 
     <script src="https://unpkg.com/htmx.org@1.9.11"
-        integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
-        crossorigin="anonymous">
-    </script>
-    <link
-        href="{{url_for('static', path='/css/app.css')}}"
-        rel="stylesheet"
-    />
+        integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous">
+        </script>
+    <link href="{{url_for('static', path='/css/app.css')}}" rel="stylesheet" />
 
     <link rel="shortcut icon" href="#">
 </head>
 
 <body>
-    <ul class="flex bg-stone-300">
-        <li class="mr-3">
-          <a class="inline-block rounded py-1 px-3 bg-slate-500 text-white" href="/index/">Home</a>
-        </li>
-        <li class="mr-3">
-            <a class="inline-block rounded py-1 px-3 bg-slate-500 text-white" href="/books/">View All Books</a>
-        </li>
-        <li class="mr-3">
-            <a class="inline-block rounded py-1 px-3 bg-slate-500 text-white" href="#">Search</a>
-        </li>
-    </ul>
+    <div>
+        <ul class="flex bg-stone-300">
+            <li class="mr-3">
+                <a class="inline-block rounded py-1 px-3 bg-slate-500 text-white" href="/index/">Home</a>
+            </li>
+            <li class="mr-3">
+                <a class="inline-block rounded py-1 px-3 bg-slate-500 text-white" href="/books/">View All Books</a>
+            </li>
+            <li class="mr-3">
+                <a class="inline-block rounded py-1 px-3 bg-slate-500 text-white" href="/search/">Search</a>
+            </li>
+        </ul>
+    </div>
 
     {% block content %}
+    <!-- Block content goes here -->
     {% endblock %}
 </body>
 

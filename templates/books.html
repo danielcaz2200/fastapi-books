@@ -1,25 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <body>
     <div class="flex items-center justify-center">
-        <table class="min-w-[50%] id="books-table">
+        <table class="min-w-[50%]" id="books-table">
             <thead>
                 <tr>
+                    <th class="border">ID</th>
                     <th class="border">Published</th>
                     <th class="border">Author</th>
                     <th class="border">Title</th>
                     <th class="border">First Sentence</th>
                 </tr>
             </thead>
-            <tbody clas="text-center text-sm">
+            <tbody class="text-center text-sm">
                 {% for book in books %}
-                    <tr>
+                <tr>
+                    <td class="border">{{ book.id }}</td>
                     <td class="border">{{ book.published }}</td>
                     <td class="border">{{ book.author }}</td>
                     <td class="border">{{ book.title }}</td>
                     <td class="border">{{ book.first_sentence }}</td>
-                    </tr>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>

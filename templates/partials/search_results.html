@@ -1,0 +1,22 @@
+<table class="min-w-[50%]" id="books-table">
+    <thead>
+        <tr>
+            <th class="border">ID</th>
+            <th class="border">Published</th>
+            <th class="border">Author</th>
+            <th class="border">Title</th>
+            <th class="border">First Sentence</th>
+        </tr>
+    </thead>
+    <tbody id="table-body" class="text-center text-sm">
+        {% for book in books %}
+            <tr>
+                <td class="border">{{ book.id }}</td>
+                <td class="border">{{ book.published }}</td>
+                <td class="border">{{ book.author }}</td>
+                <td class="border">{{ book.title }}</td>
+                <td class="border">{{ book.first_sentence }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
