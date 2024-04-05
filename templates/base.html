@@ -4,28 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="pragma" content="no-cache" />
-    <title>Book app</title>
+    <title>Book Inventory System</title>
 
     <script src="https://unpkg.com/htmx.org@1.9.11"
         integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous">
         </script>
-    <link href="{{url_for('static', path='/css/app.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static', path='/css/app.css')}}?version=1" rel="stylesheet" />
 
     <link rel="shortcut icon" href="#">
 </head>
 
 <body>
     <div>
-        <ul class="flex bg-stone-300">
+        <ul class="flex">
             <li class="mr-3">
-                <a class="inline-block rounded py-1 px-3 bg-slate-500 text-white" href="/index/">Home</a>
+                <a class="inline-block rounded py-1 px-3 bg-emerald-600 text-white hover:text-blue-200 border border" href="/index/">Home</a>
             </li>
             <li class="mr-3">
-                <a class="inline-block rounded py-1 px-3 bg-slate-500 text-white" href="/books/">View All Books</a>
+                <a class="inline-block rounded py-1 px-3 bg-emerald-600 text-white hover:text-blue-200 border" href="/books/">View All Books</a>
             </li>
             <li class="mr-3">
-                <a class="inline-block rounded py-1 px-3 bg-slate-500 text-white" href="/search/">Search</a>
+                <a class="inline-block rounded py-1 px-3 bg-emerald-600 text-white hover:text-blue-200 border" href="/search/">Search</a>
+            </li>
+            <li class="mr-3">
+                <a class="inline-block rounded py-1 px-3 bg-emerald-600 text-white hover:text-blue-200 border" href="/create_books/">Add Books</a>
+            </li>
+            <li class="mr-3">
+                <a class="inline-block rounded py-1 px-3 bg-emerald-600 text-white hover:text-blue-200 border" href="/delete_books/">Delete Books</a>
             </li>
         </ul>
     </div>

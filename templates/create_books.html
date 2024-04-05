@@ -4,12 +4,12 @@
 
 <body>
     <div class="flex items-center justify-center">
-        <p class="py-6">Search Books</p>
+        <p class="py-6">Add Books to the Database</p>
     </div>
 
     <div class="flex justify-center">
         <div class="w-full max-w-xs">
-            <form hx-post="/search/" hx-target="#table-div" class="bg-gray-100 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <form hx-post="/books/" hx-target="#entry-div" class="bg-gray-100 shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div class="mb-4">
                     <input
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -28,15 +28,22 @@
                         id="title" name="title" type="text" placeholder="Title">
                 </div>
 
+                <div class="mb-4">
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="first_sentence" name="first_sentence" type="text" placeholder="First sentence of the book...">
+                </div>
+
                 <button type="submit"
                     class="bg-slate-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                    Search
+                    Add book to database
                 </button>
             </form>
         </div>
     </div>
 
-    <div id="table-div" class="flex items-center justify-center">
+
+    <div id="entry-div" class="flex items-center justify-center">
        <!-- Contents replaced by HTMX target -->
     </div>
 </body>
