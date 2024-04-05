@@ -136,10 +136,6 @@ def create_book(
 
 @app.get('/delete_books/', response_class=HTMLResponse, status_code=200)
 def delete_books(request: Request, db: sqlite3.Connection = Depends(get_db)):
-    context = {
-        'request': request
-    }
-
     cur = db.cursor()
     query = """SELECT * FROM books;"""
     res = cur.execute(query)
@@ -155,11 +151,16 @@ def delete_books(request: Request, db: sqlite3.Connection = Depends(get_db)):
     )
 
 
-@app.delete('/books/{id}', status_code=200)
+@app.delete('/books/{id}', response_class=HTMLResponse, status_code=200)
 def delete_book(
+    request: Request,
     id: int,
     db: sqlite3.Connection = Depends(get_db)
 ):
+    context = {
+        'request': request
+    }
+    
     cur = db.cursor()
     try:
         query = """
@@ -168,15 +169,23 @@ def delete_book(
         """
         cur.execute(query, (id,))
         db.commit()
-    except sqlite3.Error as err:
-        raise HTTPException(
+    except Exception as err:
+        error_message = HTTPException(
             status_code=409,
             detail={
                 'error': str(err)
             }
         )
 
-    return {'message': 'Item deleted'}
+        context['error_message'] = error_message
+
+        return templates.TemplateResponse(
+            'partials/error_message.html', context
+        )
+
+    return templates.TemplateResponse(
+        'partials/empty_row.html', context
+    )
 
 
 @app.post('/search/', response_class=HTMLResponse, status_code=201)

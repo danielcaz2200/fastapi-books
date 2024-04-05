@@ -20,12 +20,12 @@
             </thead>
             <tbody class="text-center text-sm">
                 {% for book in books %}
-                <tr>
+                <tr id="book-{{ book.id }}">
                     <td class="border">{{ book.id }}</td>
                     <td class="border">{{ book.published }}</td>
                     <td class="border">{{ book.author }}</td>
                     <td class="border">{{ book.title }}</td>
-                    <td class="border"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 rounded-full">Delete</button></td>
+                    <td class="border"><button hx-delete="/books/{{ book.id }}" hx-confirm="Are you sure?" hx-target="#book-{{ book.id }}" hx-swap="outerHTML" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 rounded-full">Delete</button></td>
                 </tr>
                 {% endfor %}
             </tbody>
